@@ -74,8 +74,8 @@ higher than the numbers on this page.
     </tr>
     {% endfor %}
 </table>
-{% if yum_data['remarks'] %}
-<p>{{ yum_data['remarks'] }}</p>
+{% if yum_remarks %}
+<p>{{ yum_remarks }}</p>
 {% endif %}
 
 
@@ -107,8 +107,8 @@ higher than the numbers on this page.
     </tr>
     {% endfor %}
 </table>
-{% if dd_data['remarks'] %}
-<p>{{ dd_data['remarks'] }}</p>
+{% if dd_remarks %}
+<p>{{ dd_remarks }}</p>
 {% endif %}
 
 {% endblock %}

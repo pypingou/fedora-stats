@@ -54,11 +54,21 @@ def generate_release_stats(data_file):
     keys = data.keys()
     keys.sort()
     yum_data = [int(data[key][0]) for key in keys]
+    yum_remarks = ""
+    try:
+        yum_remarks = config.get('yum_data', 'remarks')
+    except ConfigParser.NoOptionError:
+        pass
 
     data = get_data(config.get('direct_download', 'data'))
     keys = data.keys()
     keys.sort()
     dd_data = [int(data[key][0]) for key in keys]
+    dd_remarks=""
+    try:
+        dd_remarks = config.get('yum_data', 'remarks')
+    except ConfigParser.NoOptionError:
+        pass
 
     release = config.get('info', 'release_number')
     release_date = config.get('info', 'release_date').split('-')
@@ -77,7 +87,9 @@ def generate_release_stats(data_file):
             release_name=config.get('info', 'release_name'),
             release_date=release_date,
             yum_data=yum_data,
+            yum_remarks=yum_remarks,
             dd_data=dd_data,
+            dd_remarks=dd_remarks,
             keys=keys,
         )
         # Write down the page
