@@ -1,0 +1,28 @@
+[info]
+release_number=17
+release_name=Beefy Miracle
+release_date=2012-05-29
+
+[yum_data]
+# Week,Total Unique IP
+title=Yum data
+data_type=Total Unique IP
+data :
+    1,169731 
+    2,250390
+    3,329809
+    4,410708
+    5,492634
+    6,576532
+    7,663474
+
+[direct_download]
+# Week,Total Downloads
+data:
+    1,152438
+    2,241970
+    3,316877
+    4,387947
+    5,454723
+    6,518266
+    7,582605
