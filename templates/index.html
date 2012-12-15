@@ -1,0 +1,99 @@
+{% extends "master.html" %}
+{% block body %}
+
+    <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#toggleButtonFpData").hide();
+        $("#toggleButtonWikiData").hide();
+        plot_monthly_chart(
+            "fedoraproject",
+            "fedoraproject.org unique visitors ",
+            {{ fpdates }},
+            [{
+                name: 'fedoraproject.org unique visitors',
+                data: {{ fp_data }}
+            }]
+        );
+        plot_monthly_chart(
+            "fedorawiki",
+            "Edits for the Fedora wiki",
+            {{ wikidates }},
+            [
+              {
+                name: 'Total edit',
+                data: {{ wiki_data_edit }}
+              },
+              {
+                name: 'Edits from unique IP',
+                data: {{ wiki_data_unique_edit }}
+              }
+            ]
+        );
+    });
+    </script>
+
+<h1> Statistics</h1>
+
+<p>This page contains a variety of statistics about Fedora's usage. 
+The Fedora Project believes that <a href="https://fedoraproject.org/wiki/Infrastructure/Metrics"
+title="Infrastructure/Metrics"> metrics are an important tool</a>.
+</p>
+
+<h2> Who uses Fedora?</h2>
+<p>Lots of different people.  Millions, in fact -- many millions!  You
+can see some notable examples 
+<a href="https://fedoraproject.org/wiki/Overview#Our_Community"
+title="Overview">on the Overview page</a>.
+</p>
+
+
+<h2> fedoraproject.org unique visitors </h2>
+
+<div id="fedoraproject" style="width: 800px; height: 400px"></div>
+
+<a href="#" id="toggleButton" class="ui-state-default ui-corner-all"
+onclick="runToggle('#toggleButtonFpData')">View data</a>
+
+
+<div id="toggleButtonFpData">
+    <table>
+        <tr>
+            <th>Period</th>
+            <th>Uniques IP</th>
+        </tr>
+        {% for key in fpdates %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ fp_data[loop.index - 1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+<h2> Edits to Fedora wiki  </h2>
+
+<div id="fedorawiki" style="width: 800px; height: 400px"></div>
+
+<a href="#" id="toggleButton" class="ui-state-default ui-corner-all">View data</a>
+
+<div id="toggleButtonWikiData">
+    <table style="border: 1px solid black;">
+        <tr>
+            <th>Period</th>
+            <th>Total edits</th>
+            <th>Edits from unique IPs</th>
+        </tr>
+        {% for key in wikidates %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ wiki_data_edit[loop.index - 1] }}</td>
+            <td>{{ wiki_data_unique_edit[loop.index - 1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}
