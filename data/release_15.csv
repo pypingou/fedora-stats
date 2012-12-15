@@ -1,0 +1,67 @@
+[info]
+release_number=15
+release_name=Lovelock
+release_date=2011-11-08
+
+[yum_data]
+# Week,Total Unique IP
+title=Yum data
+data_type=Total Unique IP
+data :
+    1,113237
+    2,226474
+    3,339711
+    4,452948
+    5,531070
+    6,609192
+    7,678495
+    8,761078
+    9,845652
+    10,929237
+    11,1014463
+    12,1099935
+    13,1186221
+    14,1273706
+    15,1361856
+    16,1441193
+    17,1535212
+    18,1629196
+    19,1722126
+    20,1809754
+    21,1900690
+    22,1991337
+    23,2079744
+    24,2167484
+remarks: The normal weekly count was unintentionally interrupted by a
+    log host rebuild. However, the cumulative count is still correct and
+    can be maintained normally for the remainder of the release cycle.
+    For the graph, the cumulative number has been average over week 1 to 4
+    and 5 and 6.
+
+[direct_download]
+# Week,Total Downloads
+data:
+    1,224960
+    2,330843
+    3,416980
+    4,502295
+    5,568600
+    6,640989
+    7,709973
+    8,777052
+    9,846061
+    10,913547
+    11,980782
+    12,1049790
+    13,1117707
+    14,1177185
+    15,1245136
+    16,1314975
+    17,1386496
+    18,1458087
+    19,1527578
+    20,1593314
+    21,1665152
+    22,1738334
+    23,1806455
+    24,1873099
