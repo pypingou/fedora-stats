@@ -5,30 +5,32 @@
     <script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-    plot_chart(
-        "yum_data",
-        "Yum data for Fedora {{ release }} ({{ release_name }})",
-        "Total Unique IP",
-        [{
-            name: 'F16',
-            pointInterval: 24 * 3600 * 1000 * 7,
-            pointStart: Date.UTC({{ release_date }}),
-            data: {{ yum_data }}
-        }]
-    );
-    plot_chart(
-        "direct_download",
-        "Direct download data for Fedora {{ release }} ({{ release_name }})",
-        "Total Download",
-        [{
-            name: 'F16',
-            pointInterval: 24 * 3600 * 1000 * 7,
-            pointStart: Date.UTC({{ release_date | filter_format_date_for_js }}),
-            data: {{ dd_data }}
-        }]
-    );
-});
-</script>
+        $("#toggleButtonYumData").hide();
+        $("#toggleButtonDDData").hide();
+        plot_chart(
+            "yum_data",
+            "Yum data for Fedora {{ release }} ({{ release_name }})",
+            "Total Unique IP",
+            [{
+                name: 'Fedora {{release}}',
+                pointInterval: 24 * 3600 * 1000 * 7,
+                pointStart: Date.UTC({{ release_date | filter_format_date_for_js}}),
+                data: {{ yum_data }}
+            }]
+        );
+        plot_chart(
+            "direct_download",
+            "Direct download data for Fedora {{ release }} ({{ release_name }})",
+            "Total Download",
+            [{
+                name: 'Fedora {{release}}',
+                pointInterval: 24 * 3600 * 1000 * 7,
+                pointStart: Date.UTC({{ release_date | filter_format_date_for_js }}),
+                data: {{ dd_data }}
+            }]
+        );
+    });
+    </script>
 
 <h1> Release {{ release }} ({{ release_name }})</h1>
 
@@ -54,26 +56,31 @@ higher than the numbers on this page.
 </p>
 <div id="yum_data" style="width: 800px; height: 400px"></div>
 
-<table style="border: 1px solid black;">
-    <tr>
-        <th>Week</th>
-        <th>Dates</th>
-        <th>New unique IP</th>
-        <th>Total number of unique IP</th>
-    </tr>
-    {% for key in keys %}
-    <tr>
-        <td>{{ key }}</td>
-        <td>{{ release_date | filter_format_week_date(loop.index)}}</td>
-        {% if loop.index == 1 %}
-        <td>{{ yum_data[loop.index - 1] }}</td>
-        {% else %}
-        <td>{{ yum_data[loop.index - 1] - yum_data[loop.index - 2] }}</td>
-        {% endif %}
-        <td>{{ yum_data[loop.index - 1] }}</td>
-    </tr>
-    {% endfor %}
-</table>
+<a href="#" id="toggleButton" class="ui-state-default ui-corner-all"
+onclick="runToggle('#toggleButtonYumData')">View data</a>
+
+<div id="toggleButtonYumData">
+    <table style="border: 1px solid black;">
+        <tr>
+            <th>Week</th>
+            <th>Dates</th>
+            <th>New unique IP</th>
+            <th>Total number of unique IP</th>
+        </tr>
+        {% for key in keys %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ release_date | filter_format_week_date(loop.index)}}</td>
+            {% if loop.index == 1 %}
+            <td>{{ yum_data[loop.index - 1] }}</td>
+            {% else %}
+            <td>{{ yum_data[loop.index - 1] - yum_data[loop.index - 2] }}</td>
+            {% endif %}
+            <td>{{ yum_data[loop.index - 1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% if yum_remarks %}
 <p>{{ yum_remarks }}</p>
 {% endif %}
@@ -87,26 +94,31 @@ higher than the numbers on this page.
 </p>
 <div id="direct_download" style="width: 800px; height: 400px"></div>
 
-<table>
-    <tr>
-        <th>Week</th>
-        <th>Dates</th>
-        <th>Download of the week</th>
-        <th>Total download</th>
-    </tr>
-    {% for key in keys %}
-    <tr>
-        <td>{{ key }}</td>
-        <td>{{ release_date | filter_format_week_date(loop.index)}}</td>
-        {% if loop.index == 1 %}
-        <td>{{ dd_data[loop.index - 1] }}</td>
-        {% else %}
-        <td>{{ dd_data[loop.index - 1] - dd_data[loop.index - 2] }}</td>
-        {% endif %}
-        <td>{{ dd_data[loop.index - 1] }}</td>
-    </tr>
-    {% endfor %}
-</table>
+<a href="#" id="toggleButton" class="ui-state-default ui-corner-all"
+onclick="runToggle('#toggleButtonDDData')">View data</a>
+
+<div id="toggleButtonDDData">
+    <table>
+        <tr>
+            <th>Week</th>
+            <th>Dates</th>
+            <th>Download of the week</th>
+            <th>Total download</th>
+        </tr>
+        {% for key in keys %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ release_date | filter_format_week_date(loop.index)}}</td>
+            {% if loop.index == 1 %}
+            <td>{{ dd_data[loop.index - 1] }}</td>
+            {% else %}
+            <td>{{ dd_data[loop.index - 1] - dd_data[loop.index - 2] }}</td>
+            {% endif %}
+            <td>{{ dd_data[loop.index - 1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% if dd_remarks %}
 <p>{{ dd_remarks }}</p>
 {% endif %}
