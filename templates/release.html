@@ -74,6 +74,9 @@ higher than the numbers on this page.
     </tr>
     {% endfor %}
 </table>
+{% if yum_data['remarks'] %}
+<p>{{ yum_data['remarks'] }}</p>
+{% endif %}
 
 
 <h2> Direct download of Fedora </h2>
@@ -104,4 +107,8 @@ higher than the numbers on this page.
     </tr>
     {% endfor %}
 </table>
+{% if dd_data['remarks'] %}
+<p>{{ dd_data['remarks'] }}</p>
+{% endif %}
+
 {% endblock %}
