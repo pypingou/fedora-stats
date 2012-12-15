@@ -1,3 +1,19 @@
+[repository]
+title=Total connections to the Fedora repositories 
+data_type=Total Unique IP
+data:
+    Fedora 7,4451374
+    Fedora 8,7439881
+    Fedora 9,4169104
+    Fedora 10,4856139
+    Fedora 11,5127809
+    Fedora 12,5731467
+    Fedora 13,4804232
+    Fedora 14,5776583
+    Fedora 15,3087426
+    Fedora 16,3023629
+    Fedora 17,663474
+
 [fedoraproject]
 # Week,Total Unique IP
 title=fedoraproject.org unique visitors

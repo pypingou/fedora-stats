@@ -5,8 +5,19 @@
     <script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
+        $("#toggleButtonRepoData").hide();
         $("#toggleButtonFpData").hide();
         $("#toggleButtonWikiData").hide();
+        plot_monthly_chart(
+            "repositories",
+            "Total connections to repositories",
+            {{ reporelease }},
+            [{
+                name: 'Total connections to repositories',
+                data: {{ repodata }}
+            }],
+            true
+        );
         plot_monthly_chart(
             "fedoraproject",
             "fedoraproject.org unique visitors ",
@@ -14,7 +25,8 @@
             [{
                 name: 'fedoraproject.org unique visitors',
                 data: {{ fp_data }}
-            }]
+            }],
+            false
         );
         plot_monthly_chart(
             "fedorawiki",
@@ -29,7 +41,8 @@
                 name: 'Edits from unique IP',
                 data: {{ wiki_data_unique_edit }}
               }
-            ]
+            ],
+            false
         );
     });
     </script>
@@ -48,6 +61,33 @@ can see some notable examples
 title="Overview">on the Overview page</a>.
 </p>
 
+<h2> Total repository connections  </h2>
+
+<div id="repositories" style="width: 800px; height: 400px"></div>
+
+<a href="#" id="toggleButton" class="ui-state-default ui-corner-all"
+onclick="runToggle('#toggleButtonRepoData')">View data</a>
+
+<div id="toggleButtonRepoData">
+    <table>
+        <tr>
+            <th>Fedora release</th>
+            <th>Uniques IP</th>
+        </tr>
+        {% for key in reporelease %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ repodata[loop.index - 1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<p>TOTAL UNIQUE IPs: {{ repodata | sum }}</p>
+<p>
+This total is not a simple sum of the counts above. It is a list of unique
+IP addresses that have connected across all releases. 
+</p>
 
 <h2> fedoraproject.org unique visitors </h2>
 

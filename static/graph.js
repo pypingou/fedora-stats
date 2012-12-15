@@ -33,7 +33,8 @@ function plot_chart(areaname, graphtitle, ylegend, dataseries) {
     });
 };
 
-function plot_monthly_chart(areaname, graphtitle, xlabels, dataseries) {
+function plot_monthly_chart(areaname, graphtitle, xlabels, dataseries,
+show_labels) {
     var chart = new Highcharts.Chart({
         chart: {
             renderTo: areaname,
@@ -45,7 +46,7 @@ function plot_monthly_chart(areaname, graphtitle, xlabels, dataseries) {
         xAxis: {
             categories: xlabels,
             labels : {
-                enabled : false
+                enabled : show_labels
             }
         },
         plotOptions: {

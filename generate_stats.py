@@ -72,10 +72,15 @@ def generate_index_page():
     config = ConfigParser.ConfigParser()
     config.readfp(open(os.path.join(DATADIR, 'monthly_data.csv')))
 
+    # Handle data about the total repository connection
+    (reporelease, repodata) = get_data(config.get('repository', 'data'))
+    repodata = [int(value[0]) for value in repodata]
+
     # Handle the fedoraproject data
     (fpdates, fpdata) = get_data(config.get('fedoraproject', 'data'))
     fpdata = [int(value[0]) for value in fpdata]
 
+    # Handle the fedoraproject wiki data
     (wikidates, wikidata) = get_data(config.get('fedorawiki', 'data'))
     wiki_data_edit = [int(value[0]) for value in wikidata]
     wiki_data_unique_edit = [int(value[1]) for value in wikidata]
@@ -88,6 +93,8 @@ def generate_index_page():
         mytemplate = env.get_template('index.html')
         # Fill the template
         html = mytemplate.render(
+            reporelease=reporelease,
+            repodata=repodata,
             fpdates=fpdates,
             fp_data=fpdata,
             wikidates=wikidates,
