@@ -1,0 +1,107 @@
+{% extends "master.html" %}
+{% block body %}
+
+    <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+    plot_chart(
+        "yum_data",
+        "Yum data for Fedora {{ release }} ({{ release_name }})",
+        "Total Unique IP",
+        [{
+            name: 'F16',
+            pointInterval: 24 * 3600 * 1000 * 7,
+            pointStart: Date.UTC({{ release_date }}),
+            data: {{ yum_data }}
+        }]
+    );
+    plot_chart(
+        "direct_download",
+        "Direct download data for Fedora {{ release }} ({{ release_name }})",
+        "Total Download",
+        [{
+            name: 'F16',
+            pointInterval: 24 * 3600 * 1000 * 7,
+            pointStart: Date.UTC({{ release_date | filter_format_date_for_js }}),
+            data: {{ dd_data }}
+        }]
+    );
+});
+</script>
+
+<h1> Release {{ release }} ({{ release_name }})</h1>
+
+<p>In this page is represented some statistics about Fedora 16.</p>
+
+<h2>Yum data download</h2>
+<p>The numbers below, for yum, represent unique IP addresses that reach
+our update server, not simply downloads. We believe it is reasonable to
+equate a "new IP address checking in" with "a new installation of Fedora",
+with the following caveats:
+</p>
+<ul>
+    <li>Users who have dynamic IP addresses will likely be counted
+    multiple times, which inflates the number by some amount.</li>
+    <li>Users who are behind NAT or corporate proxies will not be
+    counted at all. </li>
+</ul>
+<p>
+The anecdotal evidence that we receive from different groups, companies,
+and organizations suggests that group (2) is significantly larger than
+group (1). As such, we believe that the true numbers in the field are
+higher than the numbers on this page.
+</p>
+<div id="yum_data" style="width: 800px; height: 400px"></div>
+
+<table style="border: 1px solid black;">
+    <tr>
+        <th>Week</th>
+        <th>Dates</th>
+        <th>New unique IP</th>
+        <th>Total number of unique IP</th>
+    </tr>
+    {% for key in keys %}
+    <tr>
+        <td>{{ key }}</td>
+        <td>{{ release_date | filter_format_week_date(loop.index)}}</td>
+        {% if loop.index == 1 %}
+        <td>{{ yum_data[loop.index - 1] }}</td>
+        {% else %}
+        <td>{{ yum_data[loop.index - 1] - yum_data[loop.index - 2] }}</td>
+        {% endif %}
+        <td>{{ yum_data[loop.index - 1] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+<h2> Direct download of Fedora </h2>
+<p>
+    The following table shows the number of direct downloads of Fedora 16 
+    media from unique IP addresses, as shown in the web proxy logs.
+    The actual number of raw downloads tends to be much higher. 
+</p>
+<div id="direct_download" style="width: 800px; height: 400px"></div>
+
+<table>
+    <tr>
+        <th>Week</th>
+        <th>Dates</th>
+        <th>Download of the week</th>
+        <th>Total download</th>
+    </tr>
+    {% for key in keys %}
+    <tr>
+        <td>{{ key }}</td>
+        <td>{{ release_date | filter_format_week_date(loop.index)}}</td>
+        {% if loop.index == 1 %}
+        <td>{{ dd_data[loop.index - 1] }}</td>
+        {% else %}
+        <td>{{ dd_data[loop.index - 1] - dd_data[loop.index - 2] }}</td>
+        {% endif %}
+        <td>{{ dd_data[loop.index - 1] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
