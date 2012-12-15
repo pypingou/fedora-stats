@@ -32,3 +32,47 @@ function plot_chart(areaname, graphtitle, ylegend, dataseries) {
         series: dataseries,
     });
 };
+
+function plot_monthly_chart(areaname, graphtitle, xlabels, dataseries) {
+    var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: areaname,
+            type: 'line'
+        },
+        title: {
+            text: graphtitle
+        },
+        xAxis: {
+            categories: xlabels,
+            labels : {
+                enabled : false
+            }
+        },
+        plotOptions: {
+            line: {
+                    dataLabels: {
+                        enabled: false
+                    },
+                    enableMouseTracking: true,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+        },
+        series: dataseries
+    });
+};
+
+
+// run the currently selected effect
+function runToggle(id) {
+    // run the effect
+    $(id).toggle("blind", "", 500);
+};
