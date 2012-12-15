@@ -1,74 +1,48 @@
-function plot_chart(areaname, graphtitle, ylegend, dataseries) {
-    var chart = new Highcharts.Chart({
-        chart: {
-            renderTo: areaname,
-            type: 'area'
-        },
-        title: {
-            text: graphtitle
-        },
-        xAxis: {
-            type: 'datetime'
-        },
-        yAxis: {
-            title: {
-                text: ylegend
-            }
-        },
-        plotOptions: {
-            area: {
-                marker: {
-                    enabled: false,
-                    symbol: 'circle',
-                    radius: 2,
-                    states: {
-                        hover: {
-                            enabled: true
-                        }
-                    }
-                }
-            }
-        },
-        series: dataseries,
-    });
+function plot_chart(areaname, xlabels, dataseries) {
+    var chart = nv.models
+        .stackedAreaChart()
+        .tooltipContent(function(key, x, y, e, graph) {
+            return '<h5>' + key + ': ' + y + ' </h5>' +'<p>' + xlabels[e.pointIndex] + '</p>' ;
+        })
+        .showLegend(false)
+        .showControls(false);
+
+    chart.x(function(d, i) { return i });
+    chart.xAxis
+        .tickFormat(function(d) { return xlabels[d] });
+
+
+    d3.select('#' + areaname + ' svg')
+      .datum(dataseries)
+      .transition().duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
 };
 
-function plot_monthly_chart(areaname, graphtitle, xlabels, dataseries,
-show_labels) {
-    var chart = new Highcharts.Chart({
-        chart: {
-            renderTo: areaname,
-            type: 'line'
-        },
-        title: {
-            text: graphtitle
-        },
-        xAxis: {
-            categories: xlabels,
-            labels : {
-                enabled : show_labels
-            }
-        },
-        plotOptions: {
-            line: {
-                    dataLabels: {
-                        enabled: false
-                    },
-                    enableMouseTracking: true,
-                    marker: {
-                        enabled: false,
-                        symbol: 'circle',
-                        radius: 2,
-                        states: {
-                            hover: {
-                                enabled: true
-                            }
-                        }
-                    }
-                }
-        },
-        series: dataseries
+
+
+function plot_monthly_chart(areaname, xlabels, dataseries) {
+    var chart = nv.models.lineChart()
+    .tooltipContent(function(key, x, y, e, graph) {
+        return '<h5>' + key + ': ' + y + ' </h5>' +'<p>' + xlabels[e.pointIndex] + '</p>' ;
     });
+
+    chart.x(function(d, i) { return i });
+    chart.xAxis
+        .tickFormat(function(d) { return xlabels[d] });
+
+
+    d3.select('#' + areaname + ' svg')
+      .datum(dataseries)
+      .transition().duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
 };
 
 

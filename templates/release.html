@@ -9,24 +9,18 @@
         $("#toggleButtonDDData").hide();
         plot_chart(
             "yum_data",
-            "Yum data for Fedora {{ release }} ({{ release_name }})",
-            "Total Unique IP",
+            {{ xlabels }},
             [{
-                name: 'Fedora {{release}}',
-                pointInterval: 24 * 3600 * 1000 * 7,
-                pointStart: Date.UTC({{ release_date | filter_format_date_for_js}}),
-                data: {{ yum_data }}
+                key: 'Fedora {{release}}',
+                values: {{ yum_data }}
             }]
         );
         plot_chart(
             "direct_download",
-            "Direct download data for Fedora {{ release }} ({{ release_name }})",
-            "Total Download",
+            {{ xlabels }},
             [{
-                name: 'Fedora {{release}}',
-                pointInterval: 24 * 3600 * 1000 * 7,
-                pointStart: Date.UTC({{ release_date | filter_format_date_for_js }}),
-                data: {{ dd_data }}
+                key: 'Fedora {{release}}',
+                values: {{ dd_data }}
             }]
         );
     });
@@ -36,7 +30,7 @@
 
 <p>In this page is represented some statistics about Fedora 16.</p>
 
-<h2>Yum data download</h2>
+<h2>Yum data download for Fedora {{ release }}</h2>
 <p>The numbers below, for yum, represent unique IP addresses that reach
 our update server, not simply downloads. We believe it is reasonable to
 equate a "new IP address checking in" with "a new installation of Fedora",
@@ -54,7 +48,9 @@ and organizations suggests that group (2) is significantly larger than
 group (1). As such, we believe that the true numbers in the field are
 higher than the numbers on this page.
 </p>
-<div id="yum_data" style="width: 800px; height: 400px"></div>
+<div id="yum_data">
+    <svg style="width: 800px; height: 400px"></svg>
+</div>
 
 <a class="ui-state-default ui-corner-all"
 onclick="runToggle('#toggleButtonYumData')">View data</a>
@@ -72,11 +68,11 @@ onclick="runToggle('#toggleButtonYumData')">View data</a>
             <td>{{ key }}</td>
             <td>{{ release_date | filter_format_week_date(loop.index)}}</td>
             {% if loop.index == 1 %}
-            <td>{{ yum_data[loop.index - 1] }}</td>
+            <td>{{ yum_data[loop.index - 1]['y'] }}</td>
             {% else %}
-            <td>{{ yum_data[loop.index - 1] - yum_data[loop.index - 2] }}</td>
+            <td>{{ yum_data[loop.index - 1]['y'] - yum_data[loop.index - 2]['y'] }}</td>
             {% endif %}
-            <td>{{ yum_data[loop.index - 1] }}</td>
+            <td>{{ yum_data[loop.index - 1]['y'] }}</td>
         </tr>
         {% endfor %}
     </table>
@@ -86,13 +82,15 @@ onclick="runToggle('#toggleButtonYumData')">View data</a>
 {% endif %}
 
 
-<h2> Direct download of Fedora </h2>
+<h2> Direct download of Fedora {{ release }}</h2>
 <p>
     The following table shows the number of direct downloads of Fedora 16 
     media from unique IP addresses, as shown in the web proxy logs.
     The actual number of raw downloads tends to be much higher. 
 </p>
-<div id="direct_download" style="width: 800px; height: 400px"></div>
+<div id="direct_download">
+    <svg style="width: 800px; height: 400px"></svg>
+</div>
 
 <a class="ui-state-default ui-corner-all"
 onclick="runToggle('#toggleButtonDDData')">View data</a>
@@ -110,11 +108,11 @@ onclick="runToggle('#toggleButtonDDData')">View data</a>
             <td>{{ key }}</td>
             <td>{{ release_date | filter_format_week_date(loop.index)}}</td>
             {% if loop.index == 1 %}
-            <td>{{ dd_data[loop.index - 1] }}</td>
+            <td>{{ dd_data[loop.index - 1]['y'] }}</td>
             {% else %}
-            <td>{{ dd_data[loop.index - 1] - dd_data[loop.index - 2] }}</td>
+            <td>{{ dd_data[loop.index - 1]['y'] - dd_data[loop.index - 2]['y'] }}</td>
             {% endif %}
-            <td>{{ dd_data[loop.index - 1] }}</td>
+            <td>{{ dd_data[loop.index - 1]['y'] }}</td>
         </tr>
         {% endfor %}
     </table>

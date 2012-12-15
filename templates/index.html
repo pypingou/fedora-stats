@@ -10,36 +10,35 @@
         $("#toggleButtonWikiData").hide();
         plot_monthly_chart(
             "repositories",
-            "Total connections to repositories",
             {{ reporelease }},
             [{
-                name: 'Total connections to repositories',
-                data: {{ repodata }}
+                key: 'Total connections to repositories',
+                values: {{ repodata }},
+                color: "#ff7f0e"
             }],
             true
         );
         plot_monthly_chart(
             "fedoraproject",
-            "fedoraproject.org unique visitors ",
             {{ fpdates }},
             [{
-                name: 'fedoraproject.org unique visitors',
-                data: {{ fp_data }}
+                key: 'fedoraproject.org unique visitors',
+                values: {{ fp_data }},
+                color: "#2ca02c"
             }],
             false
         );
         plot_monthly_chart(
             "fedorawiki",
-            "Edits for the Fedora wiki",
             {{ wikidates }},
             [
               {
-                name: 'Total edit',
-                data: {{ wiki_data_edit }}
+                key: 'Total edit',
+                values: {{ wiki_data_edit }}
               },
               {
-                name: 'Edits from unique IP',
-                data: {{ wiki_data_unique_edit }}
+                key: 'Edits from unique IP',
+                values: {{ wiki_data_unique_edit }}
               }
             ],
             false
@@ -63,7 +62,9 @@ title="Overview">on the Overview page</a>.
 
 <h2> Total repository connections  </h2>
 
-<div id="repositories" style="width: 800px; height: 400px"></div>
+<div id="repositories">
+  <svg style="width: 800px; height: 400px"></svg>
+</div>
 
 <a class="ui-state-default ui-corner-all"
 onclick="runToggle('#toggleButtonRepoData')">View data</a>
@@ -77,13 +78,13 @@ onclick="runToggle('#toggleButtonRepoData')">View data</a>
         {% for key in reporelease %}
         <tr>
             <td>{{ key }}</td>
-            <td>{{ repodata[loop.index - 1] }}</td>
+            <td>{{ repodata[loop.index - 1]['y'] }}</td>
         </tr>
         {% endfor %}
     </table>
 </div>
 
-<p>TOTAL UNIQUE IPs: {{ repodata | sum }}</p>
+<p>TOTAL UNIQUE IPs: {{ total_ip }}</p>
 <p>
 This total is not a simple sum of the counts above. It is a list of unique
 IP addresses that have connected across all releases. 
@@ -91,7 +92,9 @@ IP addresses that have connected across all releases.
 
 <h2> fedoraproject.org unique visitors </h2>
 
-<div id="fedoraproject" style="width: 800px; height: 400px"></div>
+<div id="fedoraproject">
+  <svg style="width: 800px; height: 400px"></svg>
+</div>
 
 <a class="ui-state-default ui-corner-all"
 onclick="runToggle('#toggleButtonFpData')">View data</a>
@@ -106,7 +109,7 @@ onclick="runToggle('#toggleButtonFpData')">View data</a>
         {% for key in fpdates %}
         <tr>
             <td>{{ key }}</td>
-            <td>{{ fp_data[loop.index - 1] }}</td>
+            <td>{{ fp_data[loop.index - 1]['y'] }}</td>
         </tr>
         {% endfor %}
     </table>
@@ -115,7 +118,9 @@ onclick="runToggle('#toggleButtonFpData')">View data</a>
 
 <h2> Edits to Fedora wiki  </h2>
 
-<div id="fedorawiki" style="width: 800px; height: 400px"></div>
+<div id="fedorawiki" >
+  <svg style="width: 800px; height: 400px"></svg>
+</div>
 
 <a class="ui-state-default ui-corner-all"
 onclick="runToggle('#toggleButtonWikiData')">View data</a>
@@ -131,8 +136,8 @@ onclick="runToggle('#toggleButtonWikiData')">View data</a>
         {% for key in wikidates %}
         <tr>
             <td>{{ key }}</td>
-            <td>{{ wiki_data_edit[loop.index - 1] }}</td>
-            <td>{{ wiki_data_unique_edit[loop.index - 1] }}</td>
+            <td>{{ wiki_data_edit[loop.index - 1]['y'] }}</td>
+            <td>{{ wiki_data_unique_edit[loop.index - 1]['y'] }}</td>
         </tr>
         {% endfor %}
     </table>

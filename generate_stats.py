@@ -73,28 +73,42 @@ def generate_index_page():
     config.readfp(open(os.path.join(DATADIR, 'monthly_data.csv')))
 
     # Handle data about the total repository connection
-    (reporelease, repodata) = get_data(config.get('repository', 'data'))
-    repodata = [int(value[0]) for value in repodata]
+    (reporelease, datatmp) = get_data(config.get('repository', 'data'))
+    cnt = 0
+    repodata = []
+    total_ip = 0
+    for value in datatmp:
+        repodata.append({'x': cnt, 'y': int(value[0])})
+        total_ip = total_ip + int(value[0])
+        cnt = cnt + 1
 
     # Handle the fedoraproject data
-    (fpdates, fpdata) = get_data(config.get('fedoraproject', 'data'))
-    fpdata = [int(value[0]) for value in fpdata]
+    (fpdates, datatmp) = get_data(config.get('fedoraproject', 'data'))
+    cnt = 0
+    fpdata = []
+    for value in datatmp:
+        fpdata.append({'x': cnt, 'y': int(value[0])})
+        cnt = cnt + 1
 
     # Handle the fedoraproject wiki data
-    (wikidates, wikidata) = get_data(config.get('fedorawiki', 'data'))
-    wiki_data_edit = [int(value[0]) for value in wikidata]
-    wiki_data_unique_edit = [int(value[1]) for value in wikidata]
+    (wikidates, datatmp) = get_data(config.get('fedorawiki', 'data'))
+    cnt = 0
+    wiki_data_edit = []
+    wiki_data_unique_edit = []
+    for value in datatmp:
+        wiki_data_edit.append({'x': wikidates[cnt], 'y': int(value[0])})
+        wiki_data_unique_edit.append({'x': wikidates[cnt], 'y': int(value[1])})
+        cnt = cnt + 1
 
     try:
         env = Environment()
-        env.filters['filter_format_date_for_js'] = filter_format_date_for_js
-        env.filters['filter_format_week_date'] = filter_format_week_date
         env.loader = FileSystemLoader(TEMPLATEDIR)
         mytemplate = env.get_template('index.html')
         # Fill the template
         html = mytemplate.render(
             reporelease=reporelease,
             repodata=repodata,
+            total_ip=total_ip,
             fpdates=fpdates,
             fp_data=fpdata,
             wikidates=wikidates,
@@ -116,8 +130,12 @@ def generate_release_stats(data_file):
     config.readfp(open(data_file))
     
     # Handle the yum data
-    (keys, yum_data) = get_data(config.get('yum_data', 'data'))
-    yum_data = [int(value[0]) for value in yum_data]
+    (keys, datatmp) = get_data(config.get('yum_data', 'data'))
+    cnt = 1
+    yum_data = [{'x': 0, 'y': 0}]
+    for value in datatmp:
+        yum_data.append({'x': cnt, 'y': int(value[0])})
+        cnt = cnt + 1
     yum_remarks = ""
     try:
         yum_remarks = config.get('yum_data', 'remarks')
@@ -125,7 +143,11 @@ def generate_release_stats(data_file):
         pass
 
     (ddkeys, dd_data) = get_data(config.get('direct_download', 'data'))
-    dd_data = [int(value[0]) for value in dd_data]
+    cnt = 1
+    dd_data = [{'x': 0, 'y': 0}]
+    for value in datatmp:
+        dd_data.append({'x': cnt, 'y': int(value[0])})
+        cnt = cnt + 1
     dd_remarks=""
     try:
         dd_remarks = config.get('direct_download', 'remarks')
@@ -133,13 +155,14 @@ def generate_release_stats(data_file):
         pass
 
     release = config.get('info', 'release_number')
-    release_date = config.get('info', 'release_date').split('-')
-    release_date = date(int(release_date[0]), int(release_date[1]),
-        int(release_date[2]))
+    release_date = config.get('info', 'release_date')
+
+    xlabels = [get_end_week_date(release_date, cnt)
+        for cnt in range(0, len(keys))]
+    xlabels.insert(0, release_date)
 
     try:
         env = Environment()
-        env.filters['filter_format_date_for_js'] = filter_format_date_for_js
         env.filters['filter_format_week_date'] = filter_format_week_date
         env.loader = FileSystemLoader(TEMPLATEDIR)
         mytemplate = env.get_template('release.html')
@@ -153,6 +176,7 @@ def generate_release_stats(data_file):
             dd_data=dd_data,
             dd_remarks=dd_remarks,
             keys=keys,
+            xlabels=xlabels,
         )
         # Write down the page
         stream = open('output/release_%s.html' % release, 'w')
@@ -203,15 +227,21 @@ def generate_release_index():
         print 'ERROR: %s' % err
 
 
-def filter_format_date_for_js(value, format='%Y, %m, %d'):
+def get_end_week_date(start_date, n_week):
     """ Filter used to format correctly the date for the json. """
-    value = value + timedelta(days=6)
-    return '%s, %s, %s' % (value.year, value.month - 1, value.day)
+    start_date = start_date.split('-')
+    start_date = date(int(start_date[0]), int(start_date[1]),
+        int(start_date[2]))
+    start_week = start_date + timedelta(days=7 * n_week)
+    end_week = start_week + timedelta(days=6)
+    return end_week.strftime('%Y-%m-%d')
 
 
 def filter_format_week_date(value, cnt, format='%Y-%m-%d'):
     """ Filter used to format correctly the date for the table of data.
     """
+    value = value.split('-')
+    value = date(int(value[0]), int(value[1]), int(value[2]))
     date0 = (value + timedelta(days=7 * (cnt - 1)))
     date1 = (date0 + timedelta(days=6))
     return '%s -- %s' % (date0.strftime(format), date1.strftime(format))
