@@ -1,0 +1,206 @@
+{% extends "master.html" %}
+{% block body %}
+
+<h1>About these statistics</h1>
+
+<b>Currently, there is no reliable way to determine the total number of Linux
+users, or even count the total number of users of any Linux distribution
+which does not have a mandatory per user registration process.</b>
+<br />
+Anyone who tells you otherwise may be misinformed, dishonest, or trying to sell you something.
+
+<p>
+  The numbers above do not represent a total user count for Fedora.  We
+  are counting IP addresses because that is the only thing we can
+  reliably measure. 
+  <i>OEM shipping numbers, application popularity contests, and other
+  "estimates" all have intrinsic error factors as well.</i> 
+  Without a 1:1 sales figure or registration process, user counting is a
+  difficult problem to solve.  
+  Our <a href="#Accuracy_of_metrics">accuracy</a> section below has a
+  discussion of what's wrong with IP number counts, too.
+</p>
+
+<p>When you hear someone estimate a count of users, the right questions to ask are:</p>
+<dl>
+  <dt> Precisely how did you arrive at this number? </dt>
+    <dd> For Fedora the answers are located at
+      <a href="https://fedoraproject.org/wiki/Statistics/Commands"
+        title="Statistics/Commands">this page</a>.
+    </dd>
+  <dt> Where is the data located, so someone can duplicate the process? </dt>
+    <dd> Although you do need appropriate access to our logging hosts to
+      gather the data, our <a href="https://fedoraproject.org/wiki/Infrastructure"
+      title="Infrastructure">
+        Infrastructure</a>
+      team does welcome people who want to participate in their work.
+    </dd>
+</dl>
+
+
+<h3> Accuracy of metrics </h3>
+<p>The numbers above, for yum, represent unique IP addresses that reach
+our update server, not simply downloads. We believe it is reasonable to
+equate a "new IP address checking in" with "a new installation of Fedora",
+with the following caveats:
+</p>
+<ol>
+  <li> Users who have dynamic IP addresses will likely be counted multiple
+    times, which inflates the number by some amount.
+  </li>
+  <li> Users who are behind NAT or corporate proxies will not be counted at all.</li>
+</ol>
+
+<p>
+  The anecdotal evidence that we receive from different groups, companies,
+  and organizations suggests that group (2) is significantly larger than
+  group (1).  As such, we believe that the true numbers in the field are
+  higher than the numbers on this page.
+</p>
+
+<p>
+  For a more thorough discussion and enlightening information about the
+  measurement of Fedora's userbase, refer to <a class="external text"
+  href="http://jspaleta.livejournal.com/42464.html">this blog entry</a> 
+  by <a href="https://fedoraproject.org/wiki/User:Jspaleta"
+  title="User:Jspaleta"> Jef Spaleta</a>.
+</p>
+
+
+<h3> Why is the Fedora 8 count so high? </h3>
+<p>
+  We believe this is due to the high concentration of Fedora 8 images on
+  Amazon EC2.  We may see additional changes with Fedora 14 and later as
+  that release is expected to be <a 
+  href="https://fedoraproject.org/wiki/Fedora_14_on_EC2#Interview_with_Justin_Forbes"
+  title="Fedora 14 on EC2">available on EC2</a> on release day.
+</p>
+
+<h2> Smolt Data </h2>
+<p>
+  <a class="external text" href="http://smolt.fedoraproject.org">Smolt</a> 
+  is Fedora's hardware profiling project.  It is an <b>opt-in</b> database
+  that tracks unique installations of Fedora, and various details about
+  that install.  People who install to runlevel 5 will be able to opt-in
+  during firstboot, but people who install to runlevel 3 will have to
+  install the smolt client via yum and manually register.
+</p>
+
+<h2> BitTorrent </h2>
+<p>
+  The following table shows the number of downloads that have been made
+  over BitTorrent. This table shows downloads only through trackers connected
+  to the <a class="external text" href="http://torrent.fedoraproject.org">
+    official torrent server</a>.
+</p>
+
+<table>
+  <tr>
+    <th colspan="6"> Downloads from bittorrent (as of 2011-04-12)</th>
+  </tr>
+  <tr>
+    <td> Sulphur (F9) </td>
+    <td> Cambridge (F10) </td>
+    <td> Leonidas (F11)<sup id="cite_ref-0" class="reference"><a href="#cite_note-0">[1]</a></sup> </td>
+    <td> Constantine (F12) </td>
+    <td> Goddard (F13) </td>
+    <td> Laughlin (F14)</td>
+  </tr>
+  <tr>
+    <td> 443,932 </td>
+    <td> 523,776 </td>
+    <td> 364,808 </td>
+    <td> 315,349 </td>
+    <td> 158,570 </td>
+    <td>  157,251 </td>
+  </tr>
+  <tr>
+    <td colspan="6"> 
+      <i>NOTE: these numbers seem incomplete and need to be checked against
+      torrent records. --
+      <a href="https://fedoraproject.org/wiki/User:Pfrields" title="User:Pfrields">pfrields</a> 11:35, 13 April 2011 (UTC)</i>
+    </td>
+  </tr>
+</table>
+<ol class="references">
+  <li id="cite_note-0">
+    <span class="mw-cite-backlink"><a href="#cite_ref-0">↑</a></span> 
+    <span class="reference-text">The statistics for BitTorrent were interrupted on 
+      or about 2009-09-04 Fedora 11 because of a torrent server reset. Totals at
+      that time are added to the current totals (F10: 306,696, F11: 169,832).
+    </span>
+  </li>
+</ol>
+
+
+<h2> Contributors </h2>
+
+<p>
+  <a href="/wiki/File:Accounts_2010-02.jpg" class="image">
+    <img alt="Accounts 2010-02.jpg" src="/w/uploads/2/2b/Accounts_2010-02.jpg" width="775" height="494" />
+  </a>
+</p>
+
+<p>
+  In April 2008, the <a href="https://fedoraproject.org/wiki/Account_System" title="Account System">
+  FAS (Fedora Account System)</a> process was converted to a click-through
+  process instead of a manual process of GPG signing and fax/email.
+</p>
+
+<h3> Translations </h3>
+
+<p>
+  Details about the progress of <a href="https://fedoraproject.org/wiki/L10N" title="L10N">
+  localization</a> can be found on <a class="external text"
+  href="https://fedora.transifex.com/">Transifex</a>.
+</p>
+
+
+<h3> Ambassadors </h3>
+<p>
+  Information about the <a class="external text"
+  href="https://fedorahosted.org/fama/wiki/AmbassadorMetrics">number of
+  Fedora Ambassadors</a>.
+</p>
+
+<h3> Translators </h3>
+<p>
+  Information on the <a class="external text" 
+  href="http://dimitris.glezos.com/weblog/2009/03/08/flp-advancement-study">
+  growth and numbers of Fedora Translators</a>.
+</p>
+
+<h2> <span class="mw-headline" id="Maps"> Maps </span></h2>
+<p>A variety of <a href="https://fedoraproject.org/wiki/Maps" title="Maps">
+  maps</a>  showing various statistics.
+</p>
+
+<h2> Bodhi Updates </h2>
+<p>
+  <a class="external text" href="http://bodhi.fedoraproject.org">Bodhi</a>
+  is the system that is responsible for publishing package updates to
+  Fedora releases.  It tracks various statistics and generates graphs
+  under the 'Metrics' section of each release.
+</p>
+
+<h2>  Charts </h2>
+<p>
+  Some <a href="https://fedoraproject.org/wiki/Statistics_charts" title="Statistics charts"> charts
+  </a> are available reflecting some of the information shown on this page.
+  Up-to-date charts are available at the <a class="external text" 
+  href="https://admin.fedoraproject.org/community/#statistics">Fedora community portal</a>.
+</p>
+
+<h2>Legacy Statistics </h2>
+<p>
+  Older releases and years are on the <a href="https://fedoraproject.org/wiki/Legacy_statistics"
+  title="Legacy statistics">Legacy statistics</a> page.
+</p>
+
+<h2> Commands </h2>
+<p>
+  Information on how these statistics are gathered is found <a
+  href="https://fedoraproject.org/wiki/Statistics/Commands" title="Statistics/Commands"> here</a>.
+</p>
+
+{% endblock %}
