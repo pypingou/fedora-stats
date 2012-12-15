@@ -65,6 +65,7 @@ def generate_about_page():
     except IOError, err:
         print 'ERROR: %s' % err
 
+
 def generate_index_page():
     """ Generate the front page of the project.
     """
@@ -99,6 +100,7 @@ def generate_index_page():
         stream.close()
     except IOError, err:
         print 'ERROR: %s' % err
+
 
 def generate_release_stats(data_file):
     """ Generate statistics for each release for which we have data.
@@ -170,6 +172,13 @@ def generate_release_index():
     keys = releases.keys()
     keys.sort()
     keys.reverse()
+    cnt = 0
+    while cnt < len(keys):
+        if not os.path.exists(os.path.join(DATADIR, 'release_%s.csv' %
+            keys[cnt])):
+            keys.remove(keys[cnt])
+            cnt = cnt - 1
+        cnt = cnt + 1
     try:
         env = Environment()
         env.loader = FileSystemLoader(TEMPLATEDIR)
