@@ -1,0 +1,25 @@
+{% extends "master.html" %}
+{% block body %}
+
+<h1> Statistics of our release </h1>
+
+<table>
+  <tr>
+  {% for release in keys %}
+    <td>
+      <a href="release_{{ releases[release]['release'] }}.html">
+        <img src="{{ releases[release]['banner'] }}"
+          alt="Banner Fedora {{ releases[release]['release'] }}" />
+      </a>
+      <br />
+      Fedora {{ releases[release]['release'] }}
+    </td>
+  {% if (loop.index % 4) == 0 %}
+  </tr>
+  <tr>
+  {% endif %}
+  {% endfor %}
+  </tr>
+</table>
+
+{% endblock %}
