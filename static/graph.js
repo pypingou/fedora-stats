@@ -1,11 +1,10 @@
 function plot_chart(areaname, xlabels, dataseries, prev_xlabels) {
     var chart = nv.models
-        .stackedAreaChart()
+        .lineChart()
         .tooltipContent(function(key, x, y, e, graph) {
             return '<h5>' + key + ': ' + y + ' </h5>' +'<p>' + xlabels[e.pointIndex] + '</p>' ;
         })
-        .showLegend(true)
-        .showControls(false);
+        .showLegend(true);
 
     chart.x(function(d, i) { return i });
     chart.xAxis

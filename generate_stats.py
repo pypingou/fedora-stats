@@ -255,7 +255,7 @@ def fix_list_length(maindata, prevdata):
         prevdata = prevdata[:len(maindata)]
     else:
         while len(prevdata) < len(maindata):
-            prevdata.append({'x': len(prevdata) - 1, 'y': 0})
+            prevdata.append({'x': len(prevdata) - 1, 'y': 'null'})
     return prevdata
 
 
