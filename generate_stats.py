@@ -3,6 +3,7 @@
 import ConfigParser
 from datetime import date
 from datetime import timedelta
+import locale
 import os
 import shutil
 from jinja2 import Template
@@ -103,6 +104,7 @@ def generate_index_page():
     try:
         env = Environment()
         env.loader = FileSystemLoader(TEMPLATEDIR)
+        env.filters['filter_format_number'] = filter_format_number
         mytemplate = env.get_template('index.html')
         # Fill the template
         html = mytemplate.render(
@@ -178,6 +180,7 @@ def generate_release_stats(data_file, write_output=True):
         try:
             env = Environment()
             env.filters['filter_format_week_date'] = filter_format_week_date
+            env.filters['filter_format_number'] = filter_format_number
             env.loader = FileSystemLoader(TEMPLATEDIR)
             mytemplate = env.get_template('release.html')
             # Fill the template
@@ -279,6 +282,11 @@ def filter_format_week_date(value, cnt, format='%Y-%m-%d'):
     return '%s -- %s' % (date0.strftime(format), date1.strftime(format))
 
 
+def filter_format_number(value):
+    """ Format number nicely to help readibility.
+    """
+    locale.setlocale(locale.LC_ALL, 'en_US')
+    return locale.format("%d", value, grouping=True)
 
 if __name__ == '__main__':
     main()

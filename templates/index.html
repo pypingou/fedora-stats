@@ -78,13 +78,13 @@ onclick="runToggle('#toggleButtonRepoData')">View data</a>
         {% for key in reporelease %}
         <tr>
             <td>{{ key }}</td>
-            <td>{{ repodata[loop.index - 1]['y'] }}</td>
+            <td>{{ repodata[loop.index - 1]['y'] | filter_format_number }}</td>
         </tr>
         {% endfor %}
     </table>
 </div>
 
-<p>TOTAL UNIQUE IPs: {{ total_ip }}</p>
+<p>TOTAL UNIQUE IPs: {{ total_ip | filter_format_number }}</p>
 <p>
 This total is not a simple sum of the counts above. It is a list of unique
 IP addresses that have connected across all releases. 
@@ -109,7 +109,7 @@ onclick="runToggle('#toggleButtonFpData')">View data</a>
         {% for key in fpdates %}
         <tr>
             <td>{{ key }}</td>
-            <td>{{ fp_data[loop.index - 1]['y'] }}</td>
+            <td>{{ fp_data[loop.index - 1]['y'] | filter_format_number }}</td>
         </tr>
         {% endfor %}
     </table>
@@ -136,8 +136,8 @@ onclick="runToggle('#toggleButtonWikiData')">View data</a>
         {% for key in wikidates %}
         <tr>
             <td>{{ key }}</td>
-            <td>{{ wiki_data_edit[loop.index - 1]['y'] }}</td>
-            <td>{{ wiki_data_unique_edit[loop.index - 1]['y'] }}</td>
+            <td>{{ wiki_data_edit[loop.index - 1]['y'] | filter_format_number }}</td>
+            <td>{{ wiki_data_unique_edit[loop.index - 1]['y'] | filter_format_number }}</td>
         </tr>
         {% endfor %}
     </table>
