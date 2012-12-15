@@ -13,7 +13,15 @@
             [{
                 key: 'Fedora {{release}}',
                 values: {{ yum_data }}
-            }]
+            }
+            {% if prev_yum_data %}
+            ,{
+                key: 'Fedora {{release -1}}',
+                values: {{ prev_yum_data }}
+            }
+            {% endif %}
+            ],
+            {{ prev_xlabels }}
         );
         plot_chart(
             "direct_download",
@@ -21,7 +29,15 @@
             [{
                 key: 'Fedora {{release}}',
                 values: {{ dd_data }}
-            }]
+            }
+            {% if prev_dd_data %}
+            ,{
+                key: 'Fedora {{release -1}}',
+                values: {{ prev_dd_data }}
+            }
+            {% endif %}
+            ],
+            {{ prev_xlabels }}
         );
     });
     </script>

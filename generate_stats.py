@@ -123,7 +123,7 @@ def generate_index_page():
         print 'ERROR: %s' % err
 
 
-def generate_release_stats(data_file):
+def generate_release_stats(data_file, write_output=True):
     """ Generate statistics for each release for which we have data.
     """
     config = ConfigParser.ConfigParser()
@@ -154,36 +154,55 @@ def generate_release_stats(data_file):
     except ConfigParser.NoOptionError:
         pass
 
-    release = config.get('info', 'release_number')
+    release = int(config.get('info', 'release_number'))
     release_date = config.get('info', 'release_date')
 
     xlabels = [get_end_week_date(release_date, cnt)
         for cnt in range(0, len(keys))]
     xlabels.insert(0, release_date)
 
-    try:
-        env = Environment()
-        env.filters['filter_format_week_date'] = filter_format_week_date
-        env.loader = FileSystemLoader(TEMPLATEDIR)
-        mytemplate = env.get_template('release.html')
-        # Fill the template
-        html = mytemplate.render(
-            release=release,
-            release_name=config.get('info', 'release_name'),
-            release_date=release_date,
-            yum_data=yum_data,
-            yum_remarks=yum_remarks,
-            dd_data=dd_data,
-            dd_remarks=dd_remarks,
-            keys=keys,
-            xlabels=xlabels,
-        )
-        # Write down the page
-        stream = open('output/release_%s.html' % release, 'w')
-        stream.write(to_bytes(html))
-        stream.close()
-    except IOError, err:
-        print 'ERROR: %s' % err
+    # Get data from previous version
+    prev_yum_data = None
+    prev_dd_data = None
+    prev_xlabels = 'null'
+    prev_release = release - 1
+    prev_datafile = os.path.join(DATADIR, 'release_%s.csv' % prev_release)
+    if os.path.exists(prev_datafile):
+        prev_yum_data, prev_dd_data, prev_xlabels = generate_release_stats(
+            prev_datafile, False)
+        prev_yum_data = fix_list_length(yum_data, prev_yum_data)
+        prev_dd_data = fix_list_length(dd_data, prev_dd_data)
+        prev_xlabels = fix_list_length(xlabels, prev_xlabels)
+
+    if write_output:
+        try:
+            env = Environment()
+            env.filters['filter_format_week_date'] = filter_format_week_date
+            env.loader = FileSystemLoader(TEMPLATEDIR)
+            mytemplate = env.get_template('release.html')
+            # Fill the template
+            html = mytemplate.render(
+                release=release,
+                release_name=config.get('info', 'release_name'),
+                release_date=release_date,
+                yum_data=yum_data,
+                yum_remarks=yum_remarks,
+                dd_data=dd_data,
+                dd_remarks=dd_remarks,
+                keys=keys,
+                xlabels=xlabels,
+                prev_yum_data=prev_yum_data,
+                prev_dd_data=prev_dd_data,
+                prev_xlabels=prev_xlabels,
+            )
+            # Write down the page
+            stream = open('output/release_%s.html' % release, 'w')
+            stream.write(to_bytes(html))
+            stream.close()
+        except IOError, err:
+            print 'ERROR: %s' % err
+
+    return (yum_data, dd_data, xlabels)
 
 
 def generate_release_index():
@@ -225,6 +244,19 @@ def generate_release_index():
         stream.close()
     except IOError, err:
         print 'ERROR: %s' % err
+
+
+def fix_list_length(maindata, prevdata):
+    """ Make sure that the two given list are of the same length, either
+    by adding null data or by removing data to the prevdata list.
+    Return the prevdata adjusted to the right length.
+    """
+    if len(prevdata) > len(maindata):
+        prevdata = prevdata[:len(maindata)]
+    else:
+        while len(prevdata) < len(maindata):
+            prevdata.append({'x': len(prevdata) - 1, 'y': 0})
+    return prevdata
 
 
 def get_end_week_date(start_date, n_week):
