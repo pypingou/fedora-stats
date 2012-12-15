@@ -142,7 +142,7 @@ def generate_release_stats(data_file):
     except ConfigParser.NoOptionError:
         pass
 
-    (ddkeys, dd_data) = get_data(config.get('direct_download', 'data'))
+    (ddkeys, datatmp) = get_data(config.get('direct_download', 'data'))
     cnt = 1
     dd_data = [{'x': 0, 'y': 0}]
     for value in datatmp:

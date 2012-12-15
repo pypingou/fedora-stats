@@ -68,11 +68,11 @@ onclick="runToggle('#toggleButtonYumData')">View data</a>
             <td>{{ key }}</td>
             <td>{{ release_date | filter_format_week_date(loop.index)}}</td>
             {% if loop.index == 1 %}
-            <td>{{ yum_data[loop.index - 1]['y'] }}</td>
+            <td>{{ yum_data[loop.index ]['y'] }}</td>
             {% else %}
-            <td>{{ yum_data[loop.index - 1]['y'] - yum_data[loop.index - 2]['y'] }}</td>
+            <td>{{ yum_data[loop.index ]['y'] - yum_data[loop.index - 1]['y'] }}</td>
             {% endif %}
-            <td>{{ yum_data[loop.index - 1]['y'] }}</td>
+            <td>{{ yum_data[loop.index ]['y'] }}</td>
         </tr>
         {% endfor %}
     </table>
@@ -108,11 +108,11 @@ onclick="runToggle('#toggleButtonDDData')">View data</a>
             <td>{{ key }}</td>
             <td>{{ release_date | filter_format_week_date(loop.index)}}</td>
             {% if loop.index == 1 %}
-            <td>{{ dd_data[loop.index - 1]['y'] }}</td>
+            <td>{{ dd_data[loop.index ]['y'] }}</td>
             {% else %}
-            <td>{{ dd_data[loop.index - 1]['y'] - dd_data[loop.index - 2]['y'] }}</td>
+            <td>{{ dd_data[loop.index ]['y'] - dd_data[loop.index - 1]['y'] }}</td>
             {% endif %}
-            <td>{{ dd_data[loop.index - 1]['y'] }}</td>
+            <td>{{ dd_data[loop.index ]['y'] }}</td>
         </tr>
         {% endfor %}
     </table>
