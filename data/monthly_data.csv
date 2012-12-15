@@ -1,0 +1,125 @@
+[fedoraproject]
+# Week,Total Unique IP
+title=fedoraproject.org unique visitors
+data_type=Total Unique IP
+data :
+    January 2008,   785583
+    February 2008,  782043
+    March 2008,     830078
+    April 2008,     723776
+    May 2008,       1128115
+    June 2008,      825912
+    July 2008,      751521
+    August 2008,    773209
+    September 2008, 1461490
+    October 2008,   1351477
+    November 2008,  1993547
+    December 2008,  1873217
+    January 2009,   1815135
+    February 2009,  1697108
+    March 2009,     1816077
+    April 2009,     1749571
+    May 2009,       1996040
+    June 2009,      2305280
+    July 2009,      1929651
+    August 2009,    1964544
+    September 2009, 1859708
+    October 2009,   1996649
+    November 2009,  2423626
+    December 2009,  1969482
+    January 2010,   1829467
+    February 2010,  1628215
+    March 2010,     1728081
+    April 2010,     1585905
+    May 2010,       2197213
+    June 2010,      1853870
+    July 2010,      1808418
+    August 2010,    1589666
+    September 2010, 1642009
+    October 2010,   1903774
+    November 2010,  2086089
+    December 2010,  1645695
+    January 2011,   1633474
+    February 2011,  1493936
+    March 2011,     1636965
+    April 2011,     1776393
+    May 2011,       2251895
+    June 2011,      2097498
+    July 2011,      1814156
+    August 2011,    1841150
+    September 2011, 1861263
+    October 2011,   2211634
+    November 2011,  2399947
+    December 2011,  2014011
+    January 2012,   1919572
+    February 2012,  1961273
+    March 2012,     2151326
+    April 2012,     2147165
+    May 2012,       2343961
+    June 2012,      2327675
+    July 2012,      2170612 
+
+[fedorawiki]
+# Week,Total Unique IP
+title=Edits to Fedora wiki
+data_type=Total Edits
+data_type2=Edits from unique IP
+data :
+    October 2007,   921,    426
+    November 2007,  1090,   472
+    December 2007,  807,    378
+    January 2008,   1170,   580
+    February 2008,  1244,   645
+    March 2008,     1280,   705
+    April 2008,     1283,   755
+    May 2008,       6043,   766
+    June 2008,      6561,   731
+    July 2008,      4112,   528
+    August 2008,    2226,   423
+    September 2008, 4738,   791
+    October 2008,   3848,   617
+    November 2008,  4619,   715
+    December 2008,  4627,   751
+    January 2009,   6327,   739
+    February 2009,  7444,   764
+    March 2009,     8650,   973
+    April 2009,     5294,   844
+    May 2009,       5191,   928
+    June 2009,      5337,   858
+    July 2009,      5373,   807
+    August 2009,    4864,   702
+    September 2009, 5796,   868
+    October 2009,   5407,   782
+    November 2009,  5665,   957
+    December 2009,  4058,   653
+    January 2010,   5319,   711
+    February 2010,  12384,  761
+    March 2010,     12176,  834
+    April 2010,     13874,  1001
+    May 2010,       17809,  871
+    June 2010,      13879,  672
+    July 2010,      14274,  793
+    August 2010,    13657,  791
+    September 2010, 12144,  788
+    October 2010,   12400,  888
+    November 2010,  12447,  887
+    December 2010,  7458,   627
+    January 2011,   9768,   771
+    February 2011,  11920,  950
+    March 2011,     11909,  882
+    April 2011,     10774,  835
+    May 2011,       5628,   917
+    June 2011,      6129,   767
+    July 2011,      5592,   725
+    August 2011,    4463,   589
+    September 2011, 4493,   781
+    October 2011,   3268,   633
+    November 2011,  3353,   635
+    December 2011,  2645,   584
+    January 2012,   4061,   711
+    February 2012,  4250,   696
+    March 2012,     7799,   1023
+    April 2012,     4739,   748
+    May 2012,       3897,   643
+    June 2012,      4048,   667
+    July 2012,      2842,   511 
