@@ -1,0 +1,41 @@
+[info]
+release_number=8
+release_name=Werewolf
+release_date=2007-11-08
+
+[yum_data]
+# Week,Total Unique IP
+title=Yum data
+data_type=Total Unique IP
+data :
+    1,80591
+    2,148466
+    3,218086
+    4,288119
+    5,358153
+    6,433181
+    7,508209
+    8,583239
+    9,649030
+    10,714822
+    11,780613
+    12,846406
+    13,939604
+    14,1032802
+    15,1133884
+    16,1231365
+    17,1317010
+    18,1412792
+    19,1508575
+    20,1621519
+    21,1737905
+    22,1854291
+    23,1953875
+    24,2069712
+    25,2152583
+    26,2263573
+    27,2356940
+    28,2450307
+remarks: The weeks, 4-5, 6-8, 9-12, 13-14, 18-19, 21-22, 27-28, were
+    provided as one block. The data has therefore been averaged to allow
+    correct weekly display.

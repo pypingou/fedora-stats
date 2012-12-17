@@ -1,0 +1,53 @@
+[info]
+release_number=9
+release_name=Sulphur
+release_date=2008-05-13
+
+[yum_data]
+# Week,Total Unique IP
+title=Yum data
+data_type=Total Unique IP
+data :
+    1,91847
+    2,153262
+    3,217190
+    4,283472
+    5,349755
+    6,420885
+    7,492015
+    8,559584
+    9,638500
+    10,701314
+    11,768917
+    12,840560
+    13,932415
+remarks: Three points to mention for this release: <br />
+    * The data for weeks 4-5 and 6-7 was provided as one data point. The
+    numbers have therefore been averaged to allow correct weekly display.
+    * The statistics shown here may not agree fully with the newer methods
+    used on the Statistics page. The difference is only a few percent in
+    most cases. This page has purposely not been updated against the new
+    methodology, but the newer statistics are available upon request.<br />
+    * The August 2008 intrusion event caused an unavoidable statistics lag.
+    Since connections and statistical counting were hampered for roughly
+    three weeks, we choosed no to provide the data in this visualisation. It
+    is, however, still available at 
+    <a href="https://fedoraproject.org/wiki/Legacy_statistics#Fedora_9_.28Sulphur.29">
+    https://fedoraproject.org/wiki/Legacy_statistics#Fedora_9_.28Sulphur.29</a>
+
+[direct_download]
+# Week,Total Downloads
+data:
+    1,163108
+    2,235591
+    3,295305
+    4,347899
+    5,395917
+    6,444810
+    7,490766
+    8,535615
+    9,579771
+    10,619673
+    11,662345
+    12,705293
+    13,746494

@@ -1,0 +1,36 @@
+[info]
+release_number=7
+release_name=Moonshine
+release_date=2007-05-31
+
+[yum_data]
+# Week,Total Unique IP
+title=Yum data
+data_type=Total Unique IP
+data :
+    1,70254
+    2,158747
+    3,237582
+    4,302735
+    5,382574
+    6,457828
+    7,544621
+    8,633602
+    9,722583
+    10,811214
+    11,907924
+    12,986507
+    13,1070548
+    14,1149865
+    15,1236160
+    16,1322456
+    17,1408027
+    18,1493598
+    19,1582351
+    20,1671104
+    21,1754291
+    22,1837479
+    23,1920667
+remarks: The weeks, 8-9, 15-16, 17-18, 19-20, 21-23, were provided as
+    one block. The data has therefore been averaged to allow correct
+    weekly display.

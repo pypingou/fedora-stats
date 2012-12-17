@@ -1,0 +1,40 @@
+[info]
+release_number=6
+release_name=Zod
+release_date=2006-10-24
+
+[yum_data]
+# Week,Total Unique IP
+title=Yum data
+data_type=Total Unique IP
+data :
+    1,86266
+    2,173835
+    3,266936
+    4,382243
+    5,467065
+    6,566977
+    7,663144
+    8,793381
+    9,899413
+    10,1005197
+    11,1065546
+    12,1161868
+    13,1271768
+    14,1387891
+    15,1505828
+    16,1627714
+    17,1750187
+    18,1871840
+    19,1993494
+    20,2122257
+    21,2243724
+    22,2398548
+    23,2552139
+    24,2644461
+    25,2736783
+    26,2864875
+
+remarks: The weeks, 18-19, 24-25, were provided as
+    one block. The data has therefore been averaged to allow correct
+    weekly display.
