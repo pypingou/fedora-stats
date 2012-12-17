@@ -19,6 +19,23 @@ data:
 title=fedoraproject.org unique visitors
 data_type=Total Unique IP
 data :
+    August 2006,    319090
+    September 2006, 271606
+    October 2006,   659664
+    November 2006,  503876
+    December 2006,  401676
+    January 2007,   443859
+    February 2007,  332263
+    March 2007,     259754
+    April 2007,     622364
+    May 2007,       704486
+    June 2007,      785706
+    July 2007,      610025
+    August 2007,    621736
+    September 2007, 648922
+    October 2007,   812320
+    November 2007,  1107897
+    December 2007,  761434 
     January 2008,   785583
     February 2008,  782043
     March 2008,     830078
