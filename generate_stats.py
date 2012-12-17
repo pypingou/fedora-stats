@@ -144,16 +144,22 @@ def generate_release_stats(data_file, write_output=True):
     except ConfigParser.NoOptionError:
         pass
 
-    (ddkeys, datatmp) = get_data(config.get('direct_download', 'data'))
-    cnt = 1
-    dd_data = [{'x': 0, 'y': 0}]
-    for value in datatmp:
-        dd_data.append({'x': cnt, 'y': int(value[0])})
-        cnt = cnt + 1
+    dd_data = []
+    try:
+        datatmp = []
+        (ddkeys, datatmp) = get_data(config.get('direct_download', 'data'))
+        cnt = 1
+        dd_data = [{'x': 0, 'y': 0}]
+        for value in datatmp:
+            dd_data.append({'x': cnt, 'y': int(value[0])})
+            cnt = cnt + 1
+    except ConfigParser.NoSectionError:
+        pass
+
     dd_remarks=""
     try:
         dd_remarks = config.get('direct_download', 'remarks')
-    except ConfigParser.NoOptionError:
+    except ConfigParser.Error:
         pass
 
     release = int(config.get('info', 'release_number'))
@@ -227,8 +233,11 @@ def generate_release_index():
     keys.reverse()
     cnt = 0
     while cnt < len(keys):
+        release = keys[cnt]
+        if int(release) < 10:
+            release = '0%s' % release
         if not os.path.exists(os.path.join(DATADIR, 'release_%s.csv' %
-            keys[cnt])):
+            release)):
             keys.remove(keys[cnt])
             cnt = cnt - 1
         cnt = cnt + 1
