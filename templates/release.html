@@ -44,7 +44,8 @@
 
 <h1> Release {{ release }} ({{ release_name }})</h1>
 
-<p>In this page is represented some statistics about Fedora 16.</p>
+<p>In this page is represented some statistics about Fedora {{ release }}
+({{ release_name }}).</p>
 
 <h2>Yum data download for Fedora {{ release }}</h2>
 <p>The numbers below, for yum, represent unique IP addresses that reach
@@ -98,45 +99,47 @@ onclick="runToggle('#toggleButtonYumData')">View data</a>
 <p>{{ yum_remarks }}</p>
 {% endif %}
 
+{% if dd_data %}
+    <h2> Direct download of Fedora {{ release }}</h2>
+    <p>
+        The following table shows the number of direct downloads of Fedora
+        {{ release }} ({{ release_name }}) media from unique IP addresses,
+        as shown in the web proxy logs. The actual number of raw downloads
+        tends to be much higher.
+    </p>
+    <div id="direct_download">
+        <svg style="width: 800px; height: 400px"></svg>
+    </div>
 
-<h2> Direct download of Fedora {{ release }}</h2>
-<p>
-    The following table shows the number of direct downloads of Fedora 16 
-    media from unique IP addresses, as shown in the web proxy logs.
-    The actual number of raw downloads tends to be much higher. 
-</p>
-<div id="direct_download">
-    <svg style="width: 800px; height: 400px"></svg>
-</div>
+    <a class="ui-state-default ui-corner-all"
+    onclick="runToggle('#toggleButtonDDData')">View data</a>
 
-<a class="ui-state-default ui-corner-all"
-onclick="runToggle('#toggleButtonDDData')">View data</a>
-
-<div id="toggleButtonDDData">
-    <table>
-        <tr>
-            <th>Week</th>
-            <th>Dates</th>
-            <th>Download of the week</th>
-            <th>Total download</th>
-        </tr>
-        {% for key in keys %}
-        <tr>
-            <td>{{ key }}</td>
-            <td>{{ release_date | filter_format_week_date(loop.index)}}</td>
-            {% if loop.index == 1 %}
-            <td>{{ dd_data[loop.index ]['y'] | filter_format_number }}</td>
-            {% else %}
-            {% set diff = dd_data[loop.index ]['y'] - dd_data[loop.index - 1]['y'] %}
-            <td>{{ diff | filter_format_number }}</td>
-            {% endif %}
-            <td>{{ dd_data[loop.index ]['y'] | filter_format_number }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-</div>
-{% if dd_remarks %}
-<p>{{ dd_remarks }}</p>
+    <div id="toggleButtonDDData">
+        <table>
+            <tr>
+                <th>Week</th>
+                <th>Dates</th>
+                <th>Download of the week</th>
+                <th>Total download</th>
+            </tr>
+            {% for key in keys %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ release_date | filter_format_week_date(loop.index)}}</td>
+                {% if loop.index == 1 %}
+                <td>{{ dd_data[loop.index ]['y'] | filter_format_number }}</td>
+                {% else %}
+                {% set diff = dd_data[loop.index ]['y'] - dd_data[loop.index - 1]['y'] %}
+                <td>{{ diff | filter_format_number }}</td>
+                {% endif %}
+                <td>{{ dd_data[loop.index ]['y'] | filter_format_number }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% if dd_remarks %}
+    <p>{{ dd_remarks }}</p>
+    {% endif %}
 {% endif %}
 
 {% endblock %}
