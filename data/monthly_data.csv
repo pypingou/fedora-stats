@@ -1,18 +1,18 @@
 [repository]
-title=Total connections to the Fedora repositories 
+title=Total connections to the Fedora repositories
 data_type=Total Unique IP
 data:
-    Fedora 7,4451374
-    Fedora 8,7439881
-    Fedora 9,4169104
-    Fedora 10,4856139
-    Fedora 11,5127809
-    Fedora 12,5731467
-    Fedora 13,4804232
-    Fedora 14,5776583
-    Fedora 15,3087426
-    Fedora 16,3023629
-    Fedora 17,663474
+    Fedora 7, 4498309
+    Fedora 8, 7569371
+    Fedora 9, 4218397
+    Fedora 10, 4915745
+    Fedora 11, 5233502
+    Fedora 12, 5902998
+    Fedora 13, 5003750
+    Fedora 14, 6245973
+    Fedora 15, 3309791
+    Fedora 16, 3647415
+    Fedora 17, 2972919
 
 [fedoraproject]
 # Week,Total Unique IP
@@ -90,7 +90,12 @@ data :
     April 2012,     2147165
     May 2012,       2343961
     June 2012,      2327675
-    July 2012,      2170612 
+    July 2012,      2170612
+    August 2012,    2000144
+    September 2012, 2118079
+    October 2012,   2103740
+    November 2012,  2017841
+    December 2012,  1999202
 
 [fedorawiki]
 # Week,Total Unique IP
@@ -155,4 +160,9 @@ data :
     April 2012,     4739,   748
     May 2012,       3897,   643
     June 2012,      4048,   667
-    July 2012,      2842,   511 
+    July 2012,      2842,   511
+    August 2012,    2467,   524
+    September 2012, 3886,   656
+    October 2012,   3922,   639
+    November 2012,  4061,   643
+    December 2012,  2761,   535
