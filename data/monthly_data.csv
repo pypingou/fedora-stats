@@ -1,3 +1,6 @@
+[unique_ip]
+total_ip=44275794
+
 [repository]
 title=Total connections to the Fedora repositories
 data_type=Total Unique IP

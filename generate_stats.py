@@ -77,11 +77,10 @@ def generate_index_page():
     (reporelease, datatmp) = get_data(config.get('repository', 'data'))
     cnt = 0
     repodata = []
-    total_ip = 0
     for value in datatmp:
         repodata.append({'x': cnt, 'y': int(value[0])})
-        total_ip = total_ip + int(value[0])
         cnt = cnt + 1
+    total_ip = int(config.get('unique_ip', 'total_ip'))
 
     # Handle the fedoraproject data
     (fpdates, datatmp) = get_data(config.get('fedoraproject', 'data'))
